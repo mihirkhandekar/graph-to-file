@@ -2,6 +2,8 @@ import networkx as nx
 from flask import Flask, redirect, render_template, request, send_file, url_for
 from flask_wtf import Form
 from wtforms import TextField
+from networkx.drawing.nx_pydot import to_pydot
+import pydot
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'our very hard to guess secretfir'
@@ -31,20 +33,32 @@ def draw_graph(graph_content, format):
     G = nx.DiGraph()
 
     for parent_child_relation in parent_child_relations:
-        parent = parent_child_relation[0]
-        child = parent_child_relation[1]
+        parent, child = parent_child_relation
+        if parent == 'graph':
+            parent = 'graph_'
+        if child == 'graph':
+            child = 'graph_'
         G.add_edge(parent, child)
+    
+    '''P = to_pydot(G)
 
-    A = nx.nx_agraph.to_agraph(G)
+    print(P)
+    '''
 
-    A.layout('dot', args='-Nfontsize=10 -Nwidth=".2" -Nheight=".2" -Nmargin=.1 -Gfontsize=10 -Granksep=2')
+    A = nx.drawing.nx_pydot.to_pydot(G)#nx.nx_agraph.to_agraph(G)
+
+    A.set_size(120)
+    A.set_ranksep(3)
+    A.set_fontsize(20)
+    
     if format == 'PDF':
         filename = 'graph.pdf'
+        A.write_pdf(filename)
     else:
         filename = 'graph.png'
-    A.draw(filename)
+        A.write_png(filename)
     return filename
 
 
-# Run the application
-app.run('0.0.0.0')
+if __name__ == '__main__':
+    app.run('0.0.0.0')
