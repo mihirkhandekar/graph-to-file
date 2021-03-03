@@ -46,5 +46,5 @@ def draw_graph(graph_content, format):
     return filename
 
 
-# Run the application
-app.run('0.0.0.0')
+if __name__ == '__main__':
+    app.run('0.0.0.0')
