@@ -1,1 +1,1 @@
-python graph_main.py
+web: gunicorn graph_main:app
