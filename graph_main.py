@@ -47,4 +47,4 @@ def draw_graph(graph_content, format):
 
 
 # Run the application
-app.run('0.0.0.0', port=5000)
+app.run('0.0.0.0', port=33507)
