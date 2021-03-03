@@ -39,11 +39,6 @@ def draw_graph(graph_content, format):
         if child == 'graph':
             child = 'graph_'
         G.add_edge(parent, child)
-    
-    '''P = to_pydot(G)
-
-    print(P)
-    '''
 
     A = nx.drawing.nx_pydot.to_pydot(G)#nx.nx_agraph.to_agraph(G)
 
