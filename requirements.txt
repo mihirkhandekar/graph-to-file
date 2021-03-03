@@ -8,7 +8,7 @@ Jinja2==2.11.3
 MarkupSafe==1.1.1
 networkx==2.5
 pycodestyle==2.6.0
-graphviz
+pygraphviz==1.5
 toml==0.10.2
 Werkzeug==1.0.1
 WTForms==2.3.3
