@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Graph file generator{% endblock %}
+{% block title %}Graph (Network) File Generator{% endblock %}
 
 {% block content %}
-<form method="POST">
-    <h2>Graph File Generator</h2>
-    <p>This tool generates a graph file in PDF/PNG for given graph input. The input expects one graph edge on each line,
-        with the 2 nodes comma/tab separated</p>
+<form method="POST" style="font-family:georgia, serif;">
+    <h2>Graph (Network) File Generator</h2>
+    <p>This tool converts graph data (nodes and edges) into a PDF/PNG file for given graph input. The input expects one graph edge on each line,
+        with the 2 nodes comma/tab separated.</p>
     <br />
     <a href="https://github.com/mihirkhandekar/graph-to-file">Check out on GitHub!</a>
     <br /><br />
-    <p>Example: <br />node1,node2<br />node1,node3<br />node2,node4</p><br /><br />
+    <p>Example: <br />node1,node2<br />node1,node3<br />node2,node4<br />node5,node4</p><br /><br />
 
     <p>
-        <label for="graph_data">Graph Data</label>
+        <label for="graph_data">Graph Data :</label>
+        <br/>
         <textarea id="graph_data" name="graph_data" type="text" rows="8" cols="50"></textarea>
         <br />
-        <label for="format">File download format:</label>
+        <label for="format">File download format:  </label>
         <select name="format" id="format">
             <option value="PDF">PDF</option>
             <option value="PNG">PNG</option>
@@ -26,5 +27,6 @@
 
     </p>
     <input type="submit" value="Download!" />
+    <p>{{message}}</p>
 </form>
 {% endblock %}

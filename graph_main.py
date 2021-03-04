@@ -2,13 +2,10 @@ import json
 import os
 
 import networkx as nx
-import pydot
 
 import requests
-from flask import Flask, redirect, render_template, request, send_file, url_for
+from flask import Flask, render_template, request, send_file
 from flask_recaptcha import ReCaptcha
-from flask_wtf import Form
-from networkx.drawing.nx_pydot import to_pydot
 
 app = Flask(__name__)
 
@@ -27,6 +24,9 @@ def index():
     if request.method == 'POST':
         graph_data = request.form['graph_data']
         format = request.form['format']
+        if not graph_data or not format:
+            return render_template('index.html', message='Text empty or captcha not completed.')
+
         r = requests.post('https://www.google.com/recaptcha/api/siteverify',
                           data={'secret':
                                 os.environ['RECAPTCHA_KEY'],
@@ -39,8 +39,10 @@ def index():
         if google_response['success']:
             filename = draw_graph(graph_data, format)
             return send_file(filename, as_attachment=True)
+        else:
+            return render_template('index.html', message='Invalid captcha.')
 
-    return render_template('index.html')
+    return render_template('index.html', message='')
 
 
 def draw_graph(graph_content, format):
