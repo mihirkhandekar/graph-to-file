@@ -1,8 +1,13 @@
+autopep8==1.5.5
+certifi==2020.12.5
+chardet==4.0.0
 click==7.1.2
 decorator==4.4.2
 Flask==1.1.2
+Flask-ReCaptcha==0.4.2
 Flask-WTF==0.14.3
 gunicorn==20.0.4
+idna==2.10
 itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
@@ -10,6 +15,8 @@ networkx==2.5
 pycodestyle==2.6.0
 pydot==1.4.2
 pyparsing==2.4.7
+requests==2.25.1
 toml==0.10.2
-Werkzeug==1.0.1
+urllib3==1.26.3
+Werkzeug==0.16.0
 WTForms==2.3.3
