@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 import networkx as nx
 import pydot
@@ -38,7 +39,7 @@ def index():
 
         if google_response['success']:
             filename = draw_graph(graph_data, format)
-            return send_file(filename, as_attachment=True)
+            return send_file(filename, as_attachment=True, attachment_filename=f'graph_{time.time()}.{format}')
 
     return render_template('index.html')
 
