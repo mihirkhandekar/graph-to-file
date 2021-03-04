@@ -7,22 +7,24 @@
     <h2>Graph File Generator</h2>
     <p>This tool generates a graph file in PDF/PNG for given graph input. The input expects one graph edge on each line,
         with the 2 nodes comma/tab separated</p>
-    <br/>
+    <br />
     <a href="https://github.com/mihirkhandekar/graph-to-file">Check out on GitHub!</a>
-    <br/><br/>
+    <br /><br />
     <p>Example: <br />node1,node2<br />node1,node3<br />node2,node4</p><br /><br />
 
     <p>
         <label for="graph_data">Graph Data</label>
-        <textarea id="graph_data" name="graph_data" type="text"  rows="8" cols="50"></textarea>
+        <textarea id="graph_data" name="graph_data" type="text" rows="8" cols="50"></textarea>
         <br />
         <label for="format">File download format:</label>
         <select name="format" id="format">
             <option value="PDF">PDF</option>
             <option value="PNG">PNG</option>
         </select>
-    </p>
+        <!--{{ recaptcha }}-->
+        <div class="g-recaptcha" data-sitekey="6LeV1XAaAAAAAABdGY5EryeEMH3CJ_c1yYipElJN"></div>
 
-    <input type="submit" value="Download!"/>
+    </p>
+    <input type="submit" value="Download!" />
 </form>
 {% endblock %}

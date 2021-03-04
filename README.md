@@ -5,6 +5,8 @@ A directional graph/network can be converted into a hierarchical graph. The tool
 
 Demo : https://graph-visualizer-pdf.herokuapp.com/
 
+Requires Recaptcha setup (https://www.google.com/recaptcha). Set the secret key to the RECAPTCHA_KEY environment variable and modify the site key in graph_main.py and index.html.
+
 To install,
 
 > sudo apt install graphviz
