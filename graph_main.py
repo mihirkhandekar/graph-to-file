@@ -22,28 +22,27 @@ recaptcha = ReCaptcha(app=app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        graph_data = request.form['graph_data']
-        format = request.form['format']
-        if not graph_data or not format:
-            return render_template('index.html', message='Text empty or captcha not completed.')
+    if request.method != 'POST':
+        return render_template('index.html', message='')
+    graph_data = request.form['graph_data']
+    format = request.form['format']
+    if not graph_data or not format:
+        return render_template('index.html', message='Text empty or captcha not completed.')
 
-        r = requests.post('https://www.google.com/recaptcha/api/siteverify',
-                          data={'secret':
-                                os.environ['RECAPTCHA_KEY'],
-                                'response':
-                                request.form['g-recaptcha-response']})
+    r = requests.post('https://www.google.com/recaptcha/api/siteverify',
+                      data={'secret':
+                            os.environ['RECAPTCHA_KEY'],
+                            'response':
+                            request.form['g-recaptcha-response']})
 
-        google_response = json.loads(r.text)
-        print('Captcha response: ', google_response)
+    google_response = json.loads(r.text)
+    print('Captcha response: ', google_response)
 
-        if google_response['success']:
-            filename = draw_graph(graph_data, format)
-            return send_file(filename, as_attachment=True, attachment_filename=f'graph_{time.time()}.{format}')
-        else:
-            return render_template('index.html', message='Invalid captcha.')
+    if not google_response['success']:
+        return render_template('index.html', message='Invalid captcha.')
 
-    return render_template('index.html', message='')
+    filename = draw_graph(graph_data, format)
+    return send_file(filename, as_attachment=True, attachment_filename=f'graph_{time.time()}.{format}')
 
 
 def draw_graph(graph_content, format):
